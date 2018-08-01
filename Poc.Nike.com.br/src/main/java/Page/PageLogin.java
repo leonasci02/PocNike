@@ -1,19 +1,17 @@
 package Page;
 
+import Settings.Base;
+
 public class PageLogin {
 
+	public PageLogin() {}
+	private Base baseMethod;
+	
+	public void myAccount(String Login, String Senha){
+		baseMethod.writeByElementXpath("//input[@type='email' and @tabindex='1']", Login);
+		baseMethod.writeByElementXpath("//input[@type='password' and @tabindex='2']", Senha);
+		baseMethod.clickMouseByXpath("//button[contains(text(),'Continuar')]");
+	}
 }
 
-//xpath mapeados
 
-//div[@class='combobox sel-tamanho']/div[@class='optionBox hide']/ul/li[@class='it-option'] - certo (grid de tamanhos disponiveis apenas)
-
-
-//div//a[contains(text(),'Comprar')] - certo (botão comprar)
-
-//input[@name='cep'] - certo (txt cep)
-
-
-//input[@id='btnCalculoFrete'] cert0 - (btn okFrete)
-
-//span/select - certo (quantidade - tela de carrinho)
