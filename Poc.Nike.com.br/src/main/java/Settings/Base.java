@@ -3,65 +3,71 @@ package Settings;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 public class Base extends DefaultSettings {
-	
-	public Base() {}
-	
-	public void inicialization(String urlSite) {
+
+	public Base() {
+	}
+
+	public void inicialization(String UrlSite) {
 		getInicialization("Chrome");
-		getDriver().get(urlSite);
+		getDriver().get(UrlSite);
 	}
-	
-	public void refreshWebSite(String newUrl){	
-		getDriver().navigate().to(newUrl);
+
+	public void refreshWebSite(String NewUrl) {
+		getDriver().navigate().to(NewUrl);
 	}
-	
-	public void writeByElementId(String id,String valor){
-		getById(id).sendKeys(valor);
+
+	public void writeByElementId(String Id, String Valor) {
+		getById(Id).sendKeys(Valor);
 	}
-	
-	public void writeByElementXpath(String xpath, String valor){
-		getByXpath(xpath).sendKeys(valor);
+
+	public void writeByElementXpath(String Xpath, String Valor) {
+		getByXpath(Xpath).sendKeys(Valor);
 	}
-	
-	public void clickMouseById(String id){
-		getById(id).click();
+
+	public void clickMouseById(String Id) {
+		getById(Id).click();
 	}
-	
-	public void clickMouseByXpath(String xpath){
-		getByXpath(xpath).click();
+
+	public void clickMouseByXpath(String Xpath) {
+		getByXpath(Xpath).click();
 	}
-	
-	public String returnStringValue(String xpath, String valor){
+
+	public String returnStringValue(String Xpath, String Valor) {
 		String Itens = new String();
-		List<WebElement> ReturnList = returnElementsByXpath(xpath);
+		List<WebElement> ReturnList = returnElementsByXpath(Xpath);
 		for (WebElement listWebElement : ReturnList) {
-			if(listWebElement.equals(valor)){
-				Itens = listWebElement.toString();
+			if (listWebElement.getText().equals(Valor)) {
+				Itens = listWebElement.getText();
 				listWebElement.click();
-			}else{
-				Itens = "não foi localizado: "+ valor;
+				break;
 			}
 		}
 		return Itens;
 	}
-	
-	private List<WebElement> returnElementsByXpath(String xpathExpression){
-		List<WebElement> Elementos = getDriver().findElements(By.xpath(xpathExpression));
-		return Elementos;
-	}
-	
-	private WebElement getById(String id){
-		WebElement Elemento = getDriver().findElement(By.id(id));	
-		return Elemento ;
+
+	public void dropDownByText(String Xpath, String Text) {
+		Select DropDown = new Select(getByXpath(Xpath));
+		DropDown.selectByVisibleText(Text);
 	}
 
-	private WebElement getByXpath(String xpathExpression){
-		WebElement Elemento = getDriver().findElement(By.xpath(xpathExpression));	
-		return Elemento ;
+	private List<WebElement> returnElementsByXpath(String XpathExpression) {
+		List<WebElement> Elementos = getDriver().findElements(By.xpath(XpathExpression));
+		return Elementos;
 	}
-	
+
+	private WebElement getById(String Id) {
+		WebElement Elemento = getDriver().findElement(By.id(Id));
+		return Elemento;
+	}
+
+	private WebElement getByXpath(String XpathExpression) {
+		WebElement Elemento = getDriver().findElement(By.xpath(XpathExpression));
+		return Elemento;
+	}
+
 	public void close() {
 		closeBrowser();
 	}

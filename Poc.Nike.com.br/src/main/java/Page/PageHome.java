@@ -5,10 +5,10 @@ import Settings.Base;
 public class PageHome{
 	
 	public PageHome() {}
-	private Base baseMethod;
+	Base baseMethod;
 	
-	public void AcessWebSite(String url) throws InterruptedException{
-		baseMethod.inicialization(url);
+	public void AcessWebSite(String Url){
+		baseMethod.inicialization(Url);
 	}
 
 	public void RefreshNewUrl(String newUrl){
